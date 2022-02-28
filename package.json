@@ -1,0 +1,31 @@
+{
+  "name": "create-custom-element",
+  "version": "0.0.1",
+  "description": "A tool help creating your CustomElement by Vue.",
+  "main": "lib/index.js",
+  "type": "module",
+  "files": [
+    "lib",
+    "bin",
+    "templates"
+  ],
+  "bin": {
+    "create-custom-element": "bin/create-custom-element.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "author": "Peng Joy",
+  "license": "MIT",
+  "dependencies": {
+    "cac": "^6.7.12",
+    "chalk": "^5.0.0",
+    "inquirer": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.0",
+    "@types/node": "^17.0.21",
+    "typescript": "^4.5.5"
+  }
+}
