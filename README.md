@@ -19,5 +19,5 @@ yarn create custom-element
 ### pnpm
 
 ```shell
-yarn create custom-element
+pnpm create custom-element
 ```
