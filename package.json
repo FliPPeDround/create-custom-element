@@ -13,13 +13,13 @@
     "create-custom-element": "bin/create-custom-element.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf ./lib && tsc",
+    "test": "npm run build && node ./bin/create-custom-element.js",
     "dev": "tsc -w"
   },
   "author": "Peng Joy",
   "license": "MIT",
   "dependencies": {
-    "cac": "^6.7.12",
     "chalk": "^5.0.0",
     "inquirer": "^8.2.0"
   },

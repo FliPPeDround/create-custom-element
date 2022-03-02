@@ -1,34 +1,36 @@
-import cac from 'cac'
-import { createApp } from './create-app'
-import inquirer from 'inquirer'
+// import { createApp } from './create-app'
 import chalk from 'chalk'
 import path from 'path'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
+import questions from './question/index'
 
-const cli = cac()
-
-cli.option("-t", "Choose it")
+const __dirname = fileURLToPath(import.meta.url)
 
 try {
-  const p = path.join(__dirname,"../package.json")
+  const p = path.join(__dirname,"../../package.json")
   const pkg = JSON.parse(fs.readFileSync(p, {encoding: "utf8"}))
-  console.log(`create-custom-element${pkg.version}`)
+  console.log(`create-custom-element ${chalk.cyanBright('v'+pkg.version)}`)
 } catch (e) {
   console.error(e)
 }
 
-const parsed = cli.parse()
+const answers = await questions()
 
-const directory = parsed.args[0]
-const template = parsed.options["template"]
+console.log(chalk.cyanBright('You are creating an custom element.'))
+// const answers = {
+//   template,
+//   directory,
+//   lib: undefined,
+//   ...(await inquirer.prompt(questions))
+// }
 
-const questions: inquirer.QuestionCollection[] = []
-
-if(!directory) {
-  questions.push({
-    type: 'input',
-    name: 'directory',
-    message: 'Please enter a directory',
-    default: './customElement'
-  })
-}
+// const cwd = process.cwd()
+// const targetPath = path.join(cwd, answers.directory)
+// createApp(answers.template, targetPath, answers.lib)
+console.log(chalk.green('\nDone. Now run:\n'))
+// if (targetPath !== cwd) {
+//   console.log(`  cd ${path.relative(cwd, targetPath)}`)
+// }
+console.log(chalk.green('  npm i'))
+console.log()
