@@ -2,7 +2,7 @@ export default () => {
   return {
     type: "input",
     name: "ProjectName",
-    default: () => 'custom-element',
+    default: 'custom-element',
     message: "Project name:"
   }
 }

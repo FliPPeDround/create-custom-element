@@ -3,7 +3,8 @@ import chalk from 'chalk'
 import path from 'path'
 import fs from 'fs'
 import { fileURLToPath } from 'url'
-import questions from './question/index'
+import { createApp } from './create-app.js'
+import questions from './question/index.js'
 
 const __dirname = fileURLToPath(import.meta.url)
 
@@ -17,20 +18,44 @@ try {
 
 const answers = await questions()
 
-console.log(chalk.cyanBright('You are creating an custom element.'))
-// const answers = {
-//   template,
-//   directory,
-//   lib: undefined,
-//   ...(await inquirer.prompt(questions))
-// }
+const cwd = process.cwd();
+const targetPath = path.join(cwd, answers.ProjectName);
 
-// const cwd = process.cwd()
-// const targetPath = path.join(cwd, answers.directory)
-// createApp(answers.template, targetPath, answers.lib)
-console.log(chalk.green('\nDone. Now run:\n'))
-// if (targetPath !== cwd) {
-//   console.log(`  cd ${path.relative(cwd, targetPath)}`)
-// }
-console.log(chalk.green('  npm i'))
+createApp(targetPath, answers.ProjectName);
+
+const userAgent = process.env.npm_config_user_agent ?? ''
+const packageManager = /pnpm/.test(userAgent) ? 'pnpm' : /yarn/.test(userAgent) ? 'yarn' : 'npm'
+
+console.log(`You are creating ${chalk.greenBright(answers.ProjectName)}.`)
+console.log('\nDone. Now run:\n')
+switch(packageManager)
+{
+    case 'npm':
+      {
+        console.log(chalk.green(`  cd ${answers.ProjectName}`))
+        console.log(chalk.green('  npm install'))
+        console.log(chalk.green('  npm run dev'))
+      }
+        break
+    case 'yarn':
+      {
+        console.log(chalk.green(`  cd ${answers.ProjectName}`))
+        console.log(chalk.green('  yarn'))
+        console.log(chalk.green('  yarn dev'))
+      }
+        break;
+    case 'yarn':
+      {
+        console.log(chalk.green(`  cd ${answers.ProjectName}`))
+        console.log(chalk.green('  pnpm install'))
+        console.log(chalk.green('  pnpm dev'))
+      }
+        break;
+    default:
+      {
+        console.log(chalk.green(`  cd ${answers.ProjectName}`))
+        console.log(chalk.green('  npm install'))
+        console.log(chalk.green('  npm run dev'))
+      }
+}
 console.log()

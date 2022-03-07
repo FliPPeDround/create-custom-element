@@ -1,20 +1,36 @@
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
-const templatesDir = path.join(__dirname, '../', "templates")
+const __dirname = fileURLToPath(import.meta.url)
+const templatesDir = path.join(__dirname, '../../', "templates/ts-template")
 
 export function createApp(
-  template: string,
   targetPath: string,
   libName?: string
 ) {
-  const templateDir = path.join(templatesDir, template)
+  // const templateDir = path.join(templatesDir, template)
+  const templateDir = templatesDir
+  console.log(templateDir)
   const isTemplateExit = fs.existsSync(templateDir)
 
   if (!isTemplateExit) {
-    throw `Can't find template: ${template}`
+    throw `Can't find template`
   }
   copy(templateDir, targetPath)
+
+  if (libName) {
+		const pkgJsonPath = path.join(targetPath, "package.json");
+		const pkgJson = fs.readFileSync(pkgJsonPath, {encoding: "utf8"});
+    function replacer(key: string, value: any) {
+      if (key === "name") {
+        return libName
+      }
+      return value;
+    }
+    const newPackage = JSON.stringify(JSON.parse(pkgJson),replacer,2)
+    fs.writeFileSync(pkgJsonPath, newPackage, 'utf8')
+	}
 }
 
 function copy(src: string, dest: string) {

@@ -12,5 +12,5 @@
 		"strict": true,
 		"declarationDir": "types"
 	},
-	"include": ["src/**/*", "bin/**/*"]
+	"include": ["src/**/*"]
 }

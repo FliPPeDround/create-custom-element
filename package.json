@@ -13,7 +13,7 @@
     "create-custom-element": "bin/create-custom-element.js"
   },
   "scripts": {
-    "build": "rm -rf ./lib && tsc",
+    "build": "tsc",
     "test": "npm run build && node ./bin/create-custom-element.js",
     "dev": "tsc -w"
   },
