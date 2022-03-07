@@ -17,6 +17,12 @@ export function createApp(
   if (!isTemplateExit) {
     throw `Can't find template`
   }
+
+  const isdirectoryExit = fs.existsSync(targetPath)
+
+  if (!isdirectoryExit) {
+    throw `Please Remove existing files and restart`
+  }
   copy(templateDir, targetPath)
 
   if (libName) {
