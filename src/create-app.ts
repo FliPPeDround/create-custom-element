@@ -11,29 +11,28 @@ export function createApp(
 ) {
   // const templateDir = path.join(templatesDir, template)
   const templateDir = templatesDir
-  console.log(templateDir)
   const isTemplateExit = fs.existsSync(templateDir)
-
   if (!isTemplateExit) {
     throw `Can't find template`
   }
 
   const isdirectoryExit = fs.existsSync(targetPath)
-
-  if (!isdirectoryExit) {
+  if (isdirectoryExit) {
     throw `Please Remove existing files and restart`
   }
   copy(templateDir, targetPath)
 
   if (libName) {
-		const pkgJsonPath = path.join(targetPath, "package.json");
-		const pkgJson = fs.readFileSync(pkgJsonPath, {encoding: "utf8"});
+		const pkgJsonPath = path.join(targetPath, "package.json")
+		const pkgJson = fs.readFileSync(pkgJsonPath, {encoding: "utf8"})
+
     function replacer(key: string, value: any) {
       if (key === "name") {
         return libName
       }
       return value;
     }
+
     const newPackage = JSON.stringify(JSON.parse(pkgJson),replacer,2)
     fs.writeFileSync(pkgJsonPath, newPackage, 'utf8')
 	}
