@@ -44,7 +44,7 @@ switch(packageManager)
         console.log(chalk.green('  yarn dev'))
       }
         break;
-    case 'yarn':
+    case 'pnpm':
       {
         console.log(chalk.green(`  cd ${answers.ProjectName}`))
         console.log(chalk.green('  pnpm install'))
