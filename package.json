@@ -1,6 +1,6 @@
 {
   "name": "create-custom-element",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A tool help creating your CustomElement by Vue.",
   "main": "lib/index.js",
   "type": "module",

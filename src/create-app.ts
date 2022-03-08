@@ -3,23 +3,19 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = fileURLToPath(import.meta.url)
-const templatesDir = path.join(__dirname, '../../', "templates/ts-template")
+const templatesDir = path.join(__dirname, '../../', "templates")
 
 export function createApp(
+  template: string,
   targetPath: string,
   libName?: string
 ) {
-  // const templateDir = path.join(templatesDir, template)
-  const templateDir = templatesDir
+  const templateDir = path.join(templatesDir, template)
   const isTemplateExit = fs.existsSync(templateDir)
   if (!isTemplateExit) {
     throw `Can't find template`
   }
 
-  const isdirectoryExit = fs.existsSync(targetPath)
-  if (isdirectoryExit) {
-    throw `Please Remove existing files and restart`
-  }
   copy(templateDir, targetPath)
 
   if (libName) {

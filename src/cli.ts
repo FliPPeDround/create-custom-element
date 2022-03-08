@@ -18,10 +18,12 @@ try {
 
 const answers = await questions()
 
-const cwd = process.cwd();
-const targetPath = path.join(cwd, answers.ProjectName);
+const cwd = process.cwd()
+const targetPath = path.join(cwd, answers.ProjectName)
 
-createApp(targetPath, answers.ProjectName);
+const template = answers.addTypeScript ? (answers.addJSX ? 'tsx' : 'ts') : (answers.addJSX ? 'jsx' : 'js')
+
+createApp(template, targetPath, answers.ProjectName)
 
 const userAgent = process.env.npm_config_user_agent ?? ''
 const packageManager = /pnpm/.test(userAgent) ? 'pnpm' : /yarn/.test(userAgent) ? 'yarn' : 'npm'

@@ -5,7 +5,7 @@ const isDark = ref(false)
 
 <template>
   <button @click="isDark = !isDark">
-    <span v-if="isDark">🌚</span>
+    <span v-if="isDark">🌙</span>
     <span v-else>🌞</span>
   </button>
 </template>
@@ -16,12 +16,6 @@ const isDark = ref(false)
   --bg-normal: #fAfAf9;
   --bg-active: #f5f5f4;
   --font-size: 24px;
-}
-
-:host([dark]) {
-  --color: #fef3c7;
-  --bg-normal: #262626;
-  --bg-active: #2d2d2d;
 }
 
 button {
