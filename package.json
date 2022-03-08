@@ -1,6 +1,6 @@
 {
   "name": "create-custom-element",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A tool help creating your CustomElement by Vue.",
   "main": "lib/index.js",
   "type": "module",
@@ -17,8 +17,21 @@
     "test": "npm run build && node ./bin/create-custom-element.js",
     "dev": "tsc -w"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FliPPeDround/create-custom-element.git"
+  },
+  "keywords": [
+    "web",
+    "componet",
+    "vue"
+  ],
   "author": "Peng Joy",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FliPPeDround/create-custom-element/issues"
+  },
+  "homepage": "https://github.com/FliPPeDround/create-custom-element#readme",
   "dependencies": {
     "chalk": "^5.0.0",
     "inquirer": "^8.2.0"
